@@ -21,21 +21,25 @@ public class CommandWords
     public CommandWords()
     {
         validCommands = new HashMap<>();
-        validCommands.put("go", CommandWord.GO);
-        validCommands.put("quit", CommandWord.QUIT);
-        validCommands.put("help", CommandWord.HELP);
-        validCommands.put("eat", CommandWord.EAT); // <--- Vigtigt: "eat" er med her!
-        validCommands.put("look", CommandWord.LOOK); // Hvis du også har "look"
+        validCommands.put("go", CommandWord.go);
+        validCommands.put("quit", CommandWord.quit);
+        validCommands.put("help", CommandWord.help);
+        validCommands.put("eat", CommandWord.eat);
+        validCommands.put("look", CommandWord.look);
+        validCommands.put("back", CommandWord.back);
+        validCommands.put("take", CommandWord.take);
+        validCommands.put("drop", CommandWord.drop);
+        validCommands.put("items", CommandWord.items);
     }
 
     /**
      * Given a command word, return and give its command word enum.
-     * @param aString A string.
+
      * @return The CommandWord corresponding to aString, or UNKNOWN if it's not a valid command.
      */
-    public CommandWord getCommandWord(String aString)
+    public CommandWord getCommandWord(String aWord)
     {
-        CommandWord command = validCommands.get(aString);
+        CommandWord command = validCommands.get(aWord);
         if(command != null) {
             return command;
         }
@@ -51,19 +55,36 @@ public class CommandWords
     {
         return validCommands.containsKey(aString);
     }
+
+    /**
+     * Print all valid commands to the console.
+     */
+    public void showAll()
+    {
+        for(String command : validCommands.keySet()) {
+            System.out.print(command + " ");
+        }
+        System.out.println();
+    }
+
     public enum CommandWord
     {
-        GO("go"), QUIT("quit"), HELP("help"), EAT("eat"), LOOK("look"), UNKNOWN("?");
+        go("go"), quit("quit"), help("help"),
+        eat("eat"), look("look"),back("back"),
+        UNKNOWN("?"),take("take"),
+        drop("drop"), items("items"),;
 
         private final String commandString;
 
         CommandWord(String commandString)
         {
+
             this.commandString = commandString;
         }
 
         public String toString()
         {
+
             return commandString;
         }
     }
